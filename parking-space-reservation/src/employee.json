@@ -1,0 +1,20 @@
+[
+    {
+    "EmployeeId": 11,
+    "Name": "ALENA",
+    "Email": "aaa@solar.com",
+    "CarPlate": ""
+    },
+    {
+    "EmployeeId": 11,
+    "Name": "Fero",
+    "Email": "bbb@solar.com",
+    "CarPlate": "SK-222SS"
+    },
+    {
+    "EmployeeId": 11,
+    "Name": "Jozo",
+    "Email": "ccc@solar.com",
+    "CarPlate": ""
+    }
+]
