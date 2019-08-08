@@ -9,7 +9,7 @@ class Layout extends Component {
         super(props);
 
         this.state = {
-            selected_date: "",
+            selected_date: Date(),
             parking_data: [],
             employee_data: [],
             car_data: [],
@@ -49,29 +49,28 @@ class Layout extends Component {
         }
 
         this.onDateChange = this.onDateChange.bind(this);
-        this.parseParkingData = this.parseParkingData.bind(this);
-        this.parseCarData = this.parseCarData.bind(this);
-        this.parseEmployeeData = this.parseEmployeeData.bind(this);
-        this.parseDateData = this.parseDateData.bind(this);
-        this.showTableData = this.showTableData.bind(this);
+        this.createTableData = this.createTableData.bind(this);
     }
 
     componentDidMount() {
-        var parking = require('../jsons/parkingSpot.json');
-        var car = require('../jsons/car.json');
-        var employee = require('../jsons/employee.json');
-        var date = require('../jsons/date.json');
-
-        this.parseParkingData(parking);
-        this.parseCarData(car);
-        this.parseEmployeeData(employee);
-        this.parseDateData(date);
+        ParkingData.getParkingSpots().then(result => {
+			this.setState({parking_data: result});
+        });
+        ParkingData.getEmployees().then(result => {
+			this.setState({employee_data: result});
+        });
+        ParkingData.getCars().then(result => {
+			this.setState({car_data: result});
+        });
+        ParkingData.getDate().then(result => {
+			this.setState({date_data: result});
+		});
     }
 
     onDateChange(newDate) {
-        console.log(newDate)
+        newDate = newDate.toISOString().slice(0,10);
         this.setState({selected_date: newDate})
-        this.showTableData();
+        this.createTableData();
     }
 /*
     componentDidMount() {
@@ -80,49 +79,33 @@ class Layout extends Component {
         })
     }
 */
-    showTableData() {
-        var mydate = new Date(this.state.date_data[0].date);
-        console.log(mydate.toDateString());
-    }
+    createTableData() {
+        var myDate = this.state.date_data[0].date;
 
-    parseParkingData(input) {
-        for (var i = 0; i < input.length; i++) {
-            var obj = input[i];
-            this.setState(prevState => ({
-                parking_data: [...prevState.parking_data, obj]
-            }))
-        }
-    }
-
-    parseCarData(input) {
-        for (var i = 0; i < input.length; i++) {
-            var obj = input[i];
-            this.setState(prevState => ({
-                car_data: [...prevState.car_data, obj]
-            }))
-        }
-    }
-
-    parseEmployeeData(input) {
-        for (var i = 0; i < input.length; i++) {
-            var obj = input[i];
-            this.setState(prevState => ({
-                employee_data: [...prevState.employee_data, obj]
-            }))
-        }
-    }
-
-    parseDateData(input) {
-        for (var i = 0; i < input.length; i++) {
-            var obj = input[i];
-            this.setState(prevState => ({
-                date_data: [...prevState.date_data, obj]
-            }))
-        }
+        this.state.parking_data.forEach(spot => {
+            var table_log = {}
+            table_log = {
+                'building': spot.building,
+                'floor': spot.floor,
+                'spot_name': spot.number,
+            }
+            this.state.date_data.forEach(date => {
+                if (spot.parkingSpotId === date.parkingSpotId) {
+                    if (myDate === this.state.selected_date) {
+                        table_log['occupied'] = true;
+                    } else {
+                        table_log['occupied'] = false;
+                    }
+                } else {
+                    table_log['occupied'] = false;
+                }
+            });
+        });
     }
 
     render () {
         console.log(this.state.parking_data)
+        console.log(this.state.selected_date)
         return (
             <div className="container">
                 <div className="table-container left">
