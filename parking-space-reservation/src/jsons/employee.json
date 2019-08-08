@@ -2,19 +2,16 @@
     {
     "EmployeeId": 11,
     "Name": "ALENA",
-    "Email": "aaa@solar.com",
-    "CarPlate": ""
+    "Email": "aaa@solar.com"
     },
     {
     "EmployeeId": 11,
     "Name": "Fero",
-    "Email": "bbb@solar.com",
-    "CarPlate": "SK-222SS"
+    "Email": "bbb@solar.com"
     },
     {
     "EmployeeId": 11,
     "Name": "Jozo",
-    "Email": "ccc@solar.com",
-    "CarPlate": ""
+    "Email": "ccc@solar.com"
     }
 ]

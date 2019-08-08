@@ -1,20 +1,20 @@
 [
     {
-    "parkingSpotId" : "1",
-    "number" : "100",
-    "occuptied" : false,
+    "parkingSpotId" : 1,
+    "number" : 100,
+    "occupied" : false,
     "employeeUsing" : null
     },
     {
-    "parkingSpotId" : "2",
-    "number" : "101",
-    "occuptied" : false,
+    "parkingSpotId" : 2,
+    "number" : 101,
+    "occupied" : false,
     "employeeUsing" : null
     },
     {
-    "parkingSpotId" : "3",
-    "number" : "102",
-    "occuptied" : true,
+    "parkingSpotId" : 3,
+    "number" : 102,
+    "occupied" : true,
     "employeeIdUsing" : 11
     }
 ]

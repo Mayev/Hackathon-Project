@@ -32,14 +32,33 @@ class Layout extends Component {
         console.log(newDate)
         this.setState({selected_date: newDate})
     }
-
+/*
     componentDidMount() {
         ParkingData.getParkingSpots().then(results => {
             this.setState({ parking_spots_data: results });
         })
     }
+*/
+
+    componentDidMount() {
+        parseParkingData();
+        parseCarData();
+        parseEmployeeData();
+        parseDateData();
+    }
 
     render () {
+        var data = require('../jsons/parkingSpot.json');
+
+        for(var i = 0; i < data.length; i++) {
+            var obj = data[i];
+
+            console.log("ID: " + obj.parkingSpotId);
+            console.log("number: " + obj.number);
+            console.log("occ: " + Boolean(obj.occupied));
+            console.log("IDemp: " + parseInt(obj.employeeIdUsing));
+        }
+
         return (
             <div className="container">
                 <div className="table-container left">
