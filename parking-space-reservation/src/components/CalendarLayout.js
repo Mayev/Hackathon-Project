@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import 'moment/locale/it.js';
-import { DatePicker } from 'rc-datepicker';
 import Calendar from 'react-calendar';
 import 'rc-datepicker/lib/style.css';
 import '../styles/Calendar.css'

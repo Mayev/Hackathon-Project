@@ -10,6 +10,7 @@ class Layout extends Component {
 
         this.state = {
             selected_date: "",
+            parking_spots_data: [],
             table_data: [{ id: 1, title: 'Conan the Barbarian', year: '1982' }],
             table_columns: [{
                 name: 'Title',
@@ -32,11 +33,11 @@ class Layout extends Component {
         this.setState({selected_date: newDate})
     }
 
-    test() {
-        fetch('http://yourPCip:3000/users')
-          .then(response => console.log(response.json()))
-          .then(users => console.warn(users))
-      }
+    componentDidMount() {
+        ParkingData.getParkingSpots().then(results => {
+            this.setState({ parking_spots_data: results });
+        })
+    }
 
     render () {
         return (
