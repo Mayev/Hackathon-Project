@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import 'moment/locale/it.js';
 import { DatePicker } from 'rc-datepicker';
+import Calendar from 'react-calendar';
 import 'rc-datepicker/lib/style.css';
 import '../styles/Calendar.css'
 
@@ -9,30 +10,21 @@ class CalendarLayout extends Component {
         super(props);
 
         this.state = {
-            date: "",
+            date: new Date(),
         }
-
-        this.buttonClick = this.buttonClick.bind(this);
     }
 
-    buttonClick() {
-        this.props.onDateChange(this.state.date)
-    }
+    onChange = value => this.props.onDateChange(value)
 
     render () {
+        const { value } = this.state;
+
         return (
             <div className="container">
-                <DatePicker
-                    className="date-picker"
-                    value={this.state.date}
-                    onChange={(jsDate) => this.setState({date: jsDate})}
-                    locale="en"
+                <Calendar
+                    onChange={ this.onChange }
+                    value={ value }
                 />
-                <button
-                    className="submit-date-button"
-                    onClick={this.buttonClick}>
-                    Submit Selected Date
-                </button>
             </div>
         )
     }

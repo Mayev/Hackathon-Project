@@ -23,10 +23,13 @@ class Layout extends Component {
                 right: true,
               },],
         }
+
+        this.onDateChange = this.onDateChange.bind(this)
     }
 
     onDateChange(newDate) {
         console.log(newDate)
+        this.setState({selected_date: newDate})
     }
 
     render () {
