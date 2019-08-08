@@ -1,0 +1,17 @@
+[
+    {
+    "employeeId": 11,
+    "name": "ALENA",
+    "email": "aaa@solar.com"
+    },
+    {
+    "employeeId": 12,
+    "name": "Fero",
+    "email": "bbb@solar.com"
+    },
+    {
+    "employeeId": 13,
+    "name": "Jozo",
+    "email": "ccc@solar.com"
+    }
+]
