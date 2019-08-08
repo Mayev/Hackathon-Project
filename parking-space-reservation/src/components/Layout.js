@@ -32,6 +32,12 @@ class Layout extends Component {
         this.setState({selected_date: newDate})
     }
 
+    test() {
+        fetch('http://yourPCip:3000/users')
+          .then(response => console.log(response.json()))
+          .then(users => console.warn(users))
+      }
+
     render () {
         return (
             <div className="container">
