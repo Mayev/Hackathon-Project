@@ -1,7 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-function Table() {
-    
+class Table extends Component {
+    render () {
+
+        return (
+            <div class="container">
+                
+            </div>
+        )
+
+    }
 }
 
 export default Table;
