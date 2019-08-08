@@ -10,27 +10,68 @@ class Layout extends Component {
 
         this.state = {
             selected_date: "",
-            parking_spots_data: [],
-            table_data: [{ id: 1, title: 'Conan the Barbarian', year: '1982' }],
+            parking_data: [],
+            employee_data: [],
+            car_data: [],
+            date_data: [],
+            table_data: [],
             table_columns: [{
-                name: 'Title',
-                selector: 'title',
+                name: 'Building',
+                selector: 'building',
                 sortable: true,
               },
               {
-                name: 'Year',
-                selector: 'year',
+                name: 'Floor Number',
+                selector: 'floor',
                 sortable: true,
-                right: true,
-              },],
+              },
+              {
+                name: 'Spot Number',
+                selector: 'spot',
+                sortable: true,
+              },
+              {
+                name: 'Occupied',
+                selector: 'occupied',
+                sortable: true,
+              },
+              {
+                name: 'Employee Name',
+                selector: 'emp_name',
+                sortable: true
+              },
+              {
+                name: 'E-Mail',
+                selector: 'email',
+                sortable: true,
+              }
+            ],
         }
 
-        this.onDateChange = this.onDateChange.bind(this)
+        this.onDateChange = this.onDateChange.bind(this);
+        this.parseParkingData = this.parseParkingData.bind(this);
+        this.parseCarData = this.parseCarData.bind(this);
+        this.parseEmployeeData = this.parseEmployeeData.bind(this);
+        this.parseDateData = this.parseDateData.bind(this);
+        this.showTableData = this.showTableData.bind(this);
+    }
+
+    componentDidMount() {
+        var parking = require('../jsons/parkingSpot.json');
+        var car = require('../jsons/car.json');
+        var employee = require('../jsons/employee.json');
+        var date = require('../jsons/date.json');
+
+        this.parseParkingData(parking);
+        this.parseCarData(car);
+        this.parseEmployeeData(employee);
+        this.parseDateData(date);
     }
 
     onDateChange(newDate) {
         console.log(newDate)
         this.setState({selected_date: newDate})
+        this.showTableData();
     }
 /*
     componentDidMount() {
@@ -39,26 +80,49 @@ class Layout extends Component {
         })
     }
 */
+    showTableData() {
+        var mydate = new Date(this.state.date_data[0].date);
+        console.log(mydate.toDateString());
+    }
 
-    componentDidMount() {
-        parseParkingData();
-        parseCarData();
-        parseEmployeeData();
-        parseDateData();
+    parseParkingData(input) {
+        for (var i = 0; i < input.length; i++) {
+            var obj = input[i];
+            this.setState(prevState => ({
+                parking_data: [...prevState.parking_data, obj]
+            }))
+        }
+    }
+
+    parseCarData(input) {
+        for (var i = 0; i < input.length; i++) {
+            var obj = input[i];
+            this.setState(prevState => ({
+                car_data: [...prevState.car_data, obj]
+            }))
+        }
+    }
+
+    parseEmployeeData(input) {
+        for (var i = 0; i < input.length; i++) {
+            var obj = input[i];
+            this.setState(prevState => ({
+                employee_data: [...prevState.employee_data, obj]
+            }))
+        }
+    }
+
+    parseDateData(input) {
+        for (var i = 0; i < input.length; i++) {
+            var obj = input[i];
+            this.setState(prevState => ({
+                date_data: [...prevState.date_data, obj]
+            }))
+        }
     }
 
     render () {
-        var data = require('../jsons/parkingSpot.json');
-
-        for(var i = 0; i < data.length; i++) {
-            var obj = data[i];
-
-            console.log("ID: " + obj.parkingSpotId);
-            console.log("number: " + obj.number);
-            console.log("occ: " + Boolean(obj.occupied));
-            console.log("IDemp: " + parseInt(obj.employeeIdUsing));
-        }
-
+        console.log(this.state.parking_data)
         return (
             <div className="container">
                 <div className="table-container left">

@@ -2,19 +2,16 @@
     {
         "carPlate" : "0000001",
         "employeeId" : 12,
-        "parkingSpotId" : 3 
+        "parkingSpotId" : 3
     },
-
     {
         "carPlate" : "0000001",
         "employeeId" : 11,
-        "parkingSpotId" : 2 
+        "parkingSpotId" : 2
     },
-
     {
         "carPlate" : "0000001",
         "employeeId" : 13,
-        "parkingSpotId" : 1 
+        "parkingSpotId" : 1
     }
-
 ]
