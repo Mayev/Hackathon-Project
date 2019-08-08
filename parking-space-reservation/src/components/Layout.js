@@ -26,8 +26,8 @@ class Layout extends Component {
                 sortable: true,
               },
               {
-                name: 'Spot Number',
-                selector: 'spot',
+                name: 'Parking Space Number',
+                selector: 'spot_number',
                 sortable: true,
               },
               {
@@ -50,6 +50,7 @@ class Layout extends Component {
 
         this.onDateChange = this.onDateChange.bind(this);
         this.createTableData = this.createTableData.bind(this);
+        this.compare = this.compare.bind(this)
     }
 
     componentDidMount() {
@@ -72,6 +73,10 @@ class Layout extends Component {
         this.setState({selected_date: newDate})
         this.createTableData();
     }
+
+    compare(a, b) {   
+        return (a<b?-1:(a>b?1:0));  
+    }
 /*
     componentDidMount() {
         ParkingData.getParkingSpots().then(results => {
@@ -82,25 +87,30 @@ class Layout extends Component {
     createTableData() {
         var myDate = this.state.date_data[0].date;
 
+        var table_log = []
+        var i = 0;
         this.state.parking_data.forEach(spot => {
-            var table_log = {}
-            table_log = {
-                'building': spot.building,
-                'floor': spot.floor,
-                'spot_name': spot.number,
-            }
+            table_log[i] = {};
+            table_log[i] = {'building': spot.building};
+            table_log[i]['floor'] = spot.floor;
+            table_log[i]['spot_number'] = spot.number;
             this.state.date_data.forEach(date => {
-                if (spot.parkingSpotId === date.parkingSpotId) {
-                    if (myDate === this.state.selected_date) {
-                        table_log['occupied'] = true;
+                if (String(spot.parkingSpotId).valueOf == String(date.parkingSpotId).valueOf) {
+                    console.log(myDate);
+                    console.log(String(this.state.selected_date))
+                    if (myDate === String(this.state.selected_date.slice(0,10))) {
+                        table_log[i]['occupied'] = "TRUE";
                     } else {
-                        table_log['occupied'] = false;
+                        table_log[i]['occupied'] = "FALSE";
                     }
                 } else {
-                    table_log['occupied'] = false;
+                    table_log[i]['occupied'] = "FALSE";
                 }
             });
+            i++;
         });
+        this.setState({table_data: table_log});
+        console.log(this.state.table_data)
     }
 
     render () {

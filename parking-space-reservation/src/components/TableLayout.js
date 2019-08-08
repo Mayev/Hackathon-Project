@@ -8,6 +8,13 @@ class TableLayout extends Component {
     }
 
     render () {
+/*
+        this.props.data.array.forEach(element => {
+            if (element.occupied === true) {
+
+            }
+        });
+*/
         return (
             <div className="container">
                 <DataTable
@@ -15,6 +22,8 @@ class TableLayout extends Component {
                     title="Parking Spaces"
                     columns={ this.props.columns }
                     data={ this.props.data }
+                    selectableRows
+                    onRowSelected={ this.selectRow }
                 />
             </div>
         )
