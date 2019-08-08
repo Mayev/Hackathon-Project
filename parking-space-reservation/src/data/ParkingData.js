@@ -64,4 +64,21 @@ function getDate() {
     });
 }
 
+function postParking() {
+    axios.post("https://api.myjson.com/bins/fztvx", {
+        'parkingSpotId': '',
+        'number': '',
+        'floor': '',
+        'building': '',
+        'occupied': '',
+        'employeeUsing': ''
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+}
+
 export default { getParkingSpots, getEmployees, getCars, getDate };
