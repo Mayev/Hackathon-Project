@@ -50,7 +50,6 @@ class Layout extends Component {
 
         this.onDateChange = this.onDateChange.bind(this);
         this.createTableData = this.createTableData.bind(this);
-        this.compare = this.compare.bind(this)
     }
 
     componentDidMount() {
@@ -74,8 +73,8 @@ class Layout extends Component {
         this.createTableData();
     }
 
-    compare(a, b) {   
-        return (a<b?-1:(a>b?1:0));  
+    onRowPicked(){
+        console.log("YEEES");
     }
 /*
     componentDidMount() {
@@ -87,7 +86,7 @@ class Layout extends Component {
     createTableData() {
         var myDate = this.state.date_data[0].date;
 
-        var table_log = []
+        var table_log = [];
         var i = 0;
         this.state.parking_data.forEach(spot => {
             table_log[i] = {};
@@ -95,10 +94,11 @@ class Layout extends Component {
             table_log[i]['floor'] = spot.floor;
             table_log[i]['spot_number'] = spot.number;
             this.state.date_data.forEach(date => {
-                if (String(spot.parkingSpotId).valueOf == String(date.parkingSpotId).valueOf) {
-                    console.log(myDate);
-                    console.log(String(this.state.selected_date))
-                    if (myDate === String(this.state.selected_date.slice(0,10))) {
+                if (String(spot.parkingSpotId).valueOf === String(date.parkingSpotId).valueOf) {
+                    console.log("this is normal date: " + date.date);
+                    console.log(String("selected " + this.state.selected_date.slice(0,10)));
+
+                    if (this.date === String(this.state.selected_date.slice(0,10))) {
                         table_log[i]['occupied'] = "TRUE";
                     } else {
                         table_log[i]['occupied'] = "FALSE";
@@ -114,8 +114,6 @@ class Layout extends Component {
     }
 
     render () {
-        console.log(this.state.parking_data)
-        console.log(this.state.selected_date)
         return (
             <div className="container">
                 <div className="table-container left">
@@ -131,6 +129,9 @@ class Layout extends Component {
                     />
                 </div>
             </div>
+            
+            
+            
         )
     }
 }

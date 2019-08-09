@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import 'moment/locale/it.js';
 import Calendar from 'react-calendar';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 import 'rc-datepicker/lib/style.css';
 import '../styles/Calendar.css'
+
 
 class CalendarLayout extends Component {
     constructor(props) {
@@ -12,6 +15,7 @@ class CalendarLayout extends Component {
             date: new Date(),
         }
     }
+
 
     onChange = value => this.props.onDateChange(value)
 
@@ -24,6 +28,7 @@ class CalendarLayout extends Component {
                     onChange={ this.onChange }
                     value={ value }
                 />
+                <a href="https://www.google.com/maps" target="_blank">Map of a building</a>
             </div>
         )
     }

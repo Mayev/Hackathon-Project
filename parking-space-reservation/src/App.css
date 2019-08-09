@@ -1,5 +1,5 @@
 body {
-  background-color: #282c34;
+  background-color: azure;
 }
 
 #root {
@@ -18,7 +18,7 @@ body {
 
 .App-title {
   font-size: 40px;
-  color: white;
+  color: black;
   vertical-align: top;
   text-align: center;
 }
@@ -29,8 +29,4 @@ body {
   position: relative;
   height: auto;
   padding-bottom: 2em;
-}
-
-.content-layout {
-  
 }
